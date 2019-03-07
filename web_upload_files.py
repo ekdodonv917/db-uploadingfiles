@@ -3,7 +3,7 @@ from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 
 # указываем папку, в которую будут загружаться файлы
-UPLOAD_FOLDER = 'D:/Program Files/Uploaded files'
+UPLOAD_FOLDER = 'C:/UploFiles'
 # указываем допустимые расширения
 ALLOWED_EXTENSIONS = set(['txt', 'fb2'])
 
@@ -23,6 +23,7 @@ def allowed_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 # request method  POST нужен для того чтобы загружать файлы
 def upload_file():
+    print(request.files)
     if request.method == 'POST':
         # указываем что такое file, у нас file это то, что сайт запрашивает у юзера
         file = request.files['file']
@@ -33,4 +34,4 @@ def upload_file():
             return render_template('file_uploaded.html')
     return render_template('upload_file.html')
 
-app.run()
+app.run(debug=True)
